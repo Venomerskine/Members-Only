@@ -17,8 +17,11 @@ passport.use(
                 const match = await bcrypt.compare(password, user.password)
 
                 if (!match) {
+                    console.log("User and password mismatch")
                     return done(null, user);
                 };
+                return done(null, user);
+                
             } catch(err){
                 return done(err);
             }

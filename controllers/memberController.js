@@ -19,23 +19,24 @@ register = async (req, res) => {
 
 // login
 loginSuccess = (req, res) => {
-    res,json({
-        message: "Login Seccesful",
-        user: req.user
-    })
+    res.render("dashboard", {user: req.user})
 }
 
 //logout
 
-logout = (req, res) => {
+logout = async (req, res) => {
     req.logout(() => {
         res.json({message: "Logged Out!"})
     })
 }
 
+async function logout(req, res) {
+    
+}
+
 module.exports = {
     getMemberAuth,
     register,
-    loginSuccess,
-    logout
+    logout,
+    loginSuccess
 }
