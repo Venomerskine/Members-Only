@@ -1,0 +1,21 @@
+{
+  "name": "members-only",
+  "version": "1.0.0",
+  "description": "Odin Project Members Only App",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.22.1",
+    "express-session": "^1.19.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "passport-session": "^1.0.2",
+    "pg": "^8.12.0"
+  }
+}

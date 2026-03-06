@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="auth-wrapper">
+
+  <div id="loginSection" class="login auth-section">
+    
+    <%- include('partials/login-form') %>
+  </div>
+
+  <div id="signupSection" class="signup auth-section" style="display: none;">
+    <%- include('partials/signup-form') %>
+  </div>
+  <button id="toggleBtn" class="auth-btn">Switch to Sign Up</button>
+</div>
+
+<script>
+  const toggleBtn = document.getElementById('toggleBtn');
+  const loginSection = document.getElementById('loginSection');
+  const signupSection = document.getElementById('signupSection');
+
+  toggleBtn.addEventListener('click', () => {
+    const isLogin = loginSection.style.display !== 'none';
+    loginSection.style.display = isLogin ? 'none' : 'block';
+    signupSection.style.display = isLogin ? 'block' : 'none';
+    toggleBtn.innerText = isLogin ? 'Switch to Login' : 'Switch to Sign Up';
+  });
+</script></body>
+</html>
