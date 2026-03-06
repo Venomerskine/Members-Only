@@ -8,27 +8,17 @@
 <body>
     <header>
         <h1>Members Only</h1>
-        <p>Welcome <%=user.username%></p>
+        <p>Welcome <%= user ? user.username : "Guest" %></p>
         <h1><%=user.role%></h1>
     </header>
     <main>
         <section>
-            <div class="message">Message 1</div>
-            <div class="message">Message 2</div>
-            <div class="message">Message 3</div>
-            <div class="message">Message 4</div>
+
         </section>
-        <% if (user.role === 'user') {%>
+        <% if (user.role === 'user') { %>
             <button onclick="popup.showModal()">Join The Club</button>
-            <dialog id="popup">
-                <h2>Join the Club</h2>
-                <form action="/join">
-                    <input type="text" name="join" id="join" placeholder="Enter secret code">
-                    <button type="submit">Submit</button>
-                    <button onclick="popup.close()" type="button">Close</button>
-                </form>
-            </dialog>
-        <%}%>
+            <%- include('partials/joinForm') %>
+        <% } %>
     </main>
 </body>
 </html>

@@ -1,5 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
+const db = require("../db/index")
+
 
 // get the home auth page
 async function getMemberAuth(req, res) {
@@ -34,9 +36,39 @@ async function logout(req, res) {
     
 }
 
+async function joinClub (req, res){
+    const code = req.body.join;
+    console.log("Body: ", req.body)
+    console.log("Code: ", code)
+
+    const userId = req.user.id
+
+    if(!userId){
+        return res.status(401).json({ status: "error", message: "You must be logged in" })
+    }
+
+    if (code  === process.env.MEMBERSHIP_CODE){
+        try{
+            const query = 'UPDATE users SET role = $1 WHERE id = $2'
+            await db.query(query,['member', userId])
+
+            req.session.role = 'member'
+            req.user.role = 'member'
+
+            return res.json({status: "success", message: "You are now a member"})
+        } catch(err){
+            console.error(err);
+            return res.status(500).json({ status: "error", message: "Database error" });
+        }
+    } else {
+        return res.status(403).json({ status: "error", message: "Incorrect secret code" });
+    }
+}
+
 module.exports = {
     getMemberAuth,
     register,
     logout,
-    loginSuccess
+    loginSuccess,
+    joinClub
 }

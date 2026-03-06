@@ -1,0 +1,39 @@
+<dialog id="popup">
+  <h2>Join the Club</h2>
+  <form id="joinForm">
+    <input type="text" name="join" id="joinInput" placeholder="Enter secret code" required>
+    <button type="submit">Submit</button>
+    <button type="button" onclick="popup.close()">Close</button>
+  </form>
+</dialog>
+  <script>
+const form = document.getElementById("joinForm");
+const popup = document.getElementById("popup");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault(); // prevent page reload
+
+  const code = document.getElementById("joinInput").value;
+
+  try {
+    const res = await fetch("/join-club", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ join: code })
+    });
+
+    const data = await res.json();
+
+    alert(data.message); // popup message
+
+    if (data.status === "success") {
+      popup.close();  // close the dialog
+      // optional: redirect
+      // window.location.href = "/dashboard";
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong");
+  }
+});
+</script>
