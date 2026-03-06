@@ -18,8 +18,9 @@ passport.use(
 
                 if (!match) {
                     console.log("User and password mismatch")
-                    return done(null, user);
+                    return done(null, false);
                 };
+
                 return done(null, user);
 
             } catch(err){
@@ -36,7 +37,6 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
     try{
         const user = await User.findUserById(id);
-        console.log("deserialized User", user)
         done(null, user);
     } catch (err) {
         done(err);

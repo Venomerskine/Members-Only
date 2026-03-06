@@ -12,7 +12,7 @@ router.post(
     "/login", 
     passport.authenticate("local", {
     successRedirect: "/dashboard",
-    failureRedirect: "/login"
+    failureRedirect: "/"
 }))
 
 router.post("/logout", memberController.logout)
