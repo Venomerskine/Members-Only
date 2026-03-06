@@ -35,5 +35,7 @@ logout = (req, res) => {
 
 module.exports = {
     getMemberAuth,
-    register
+    register,
+    loginSuccess,
+    logout
 }
