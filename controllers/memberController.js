@@ -9,14 +9,19 @@ async function getMemberAuth(req, res) {
 }
 
 // register new user
-register = async (req, res) => {
+const register = async (req, res) => {
+    console.log("body: ", req.body)
     const {first_name, last_name, username, email, password} = req.body;
+    try {
+        const hash = await bcrypt.hash(password, 10);
+        const user = await User.createUser(first_name, last_name, username, email, hash);
 
-    const hash = await bcrypt.hash(password, 10);
+        return res.json({status: "success", redirect: "/dashboard"})
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({status: "error", message: "Registration Failed"})
+    }
 
-    const user = await User.createUser(first_name, last_name, username, email, hash);
-
-    res.json(user)
 }
 
 // login

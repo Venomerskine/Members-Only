@@ -1,5 +1,4 @@
 const session = require("express-session");
-const passport = require("./passport")
 
 module.exports = session({
     secret: process.env.SESSION_SECRET,

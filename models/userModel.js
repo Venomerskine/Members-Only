@@ -16,7 +16,6 @@ async function findUserById(id) {
 
 async function createUser(first_name, last_name, username, email, passwordHash) {
 
-    console.log("provided details: ", first_name, last_name, email)
     const result = await db.query(
         `
             INSERT INTO users (first_name, last_name, username, email, password)
