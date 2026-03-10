@@ -82,10 +82,20 @@ async function joinClub (req, res){
     }
 }
 
+async function createMessage(req, res) {
+
+}
+
+async function deleteMessage(req, res) {
+    
+}
+
 module.exports = {
     getMemberAuth,
     register,
     logout,
     loginSuccess,
-    joinClub
+    joinClub,
+    createMessage,
+    deleteMessage
 }
