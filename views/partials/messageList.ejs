@@ -3,11 +3,14 @@
 <div class="message card">
 
     <p><%= message.title %></p>
-    <p><%= message.body_text %></p>
+    <p><%= message.boy_text %></p>
 
     <% if(user.role !== "user"){ %>
         <small>
-            <%= message.author %> • <%= message.created_at %>
+            <%= message.username %>
+        </small>
+        <small>
+            <%= message.created_at %>
         </small>
     <% } %>
 

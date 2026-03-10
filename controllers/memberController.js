@@ -96,24 +96,29 @@ async function joinClub (req, res){
 
 async function createMessage(req, res) {
     try{
-        if(!req.user || (req.user.role !== "member" && req.user !== "admin")) {
-            return res.status(403).send("Not allowed")
+
+        console.log("User Role: ",  req.user.role)
+        console.log("user?", req.user)
+        if(!req.user || (req.user.role !== 'member' && req.user !== 'admin')) {
+            return res.status(403).send("Not allowed to create")
         }
 
         const text = req.body.message?.trim();
-        const title = req.bodytitle?.trim()
+        const title = req.body.title?.trim()
 
         if (!text) {
-            return res.redirect("/dasboard")
+            return res.redirect("/dashboard")
         }
 
         await db.query(
             `
-                insert into messages (title, body_text, user_id)
+                insert into messages (title, boy_text, user_id)
                 values ($1, $2, $3)
             `,
             [title, text, req.user.id]
         )
+
+            res.redirect("/dashboard")
         
     } catch (err) {
         console.error(err);
@@ -122,15 +127,19 @@ async function createMessage(req, res) {
 }
 
 async function deleteMessage(req, res) {
-    if (req.user.role !== "admin") {
-        return res.status(403).send("Forbidden")
+    try {
+        const messageId = req.params.id;
+        
+        await db.query(
+            "DELETE FROM messages WHERE id = $1", 
+            [messageId]
+        );
+
+        res.redirect("/dashboard");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Database error");
     }
-
-    await db.query(
-        "delete from messages where id = $1", [req.params.id]
-    )
-
-    res.redirect("/dasboard")
 }
 
 module.exports = {
