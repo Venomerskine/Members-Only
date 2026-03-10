@@ -1,0 +1,22 @@
+<% messages.forEach(message => { %>
+
+<div class="message card">
+
+    <p><%= message.title %></p>
+    <p><%= message.body_text %></p>
+
+    <% if(user.role !== "user"){ %>
+        <small>
+            <%= message.author %> • <%= message.created_at %>
+        </small>
+    <% } %>
+
+    <% if(user.role === "admin"){ %>
+        <form action="/messages/<%= message.id %>?_method=DELETE" method="POST">
+            <button>Delete</button>
+        </form>
+    <% } %>
+
+</div>
+
+<% }) %>
