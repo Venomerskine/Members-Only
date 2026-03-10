@@ -41,7 +41,7 @@ const register = async (req, res) => {
 
 // login
 loginSuccess = (req, res) => {
-    res.render("dashboard", {user: req.user})
+    res.redirect("/dashboard")
 }
 
 //logout

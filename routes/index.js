@@ -5,7 +5,7 @@ const passport = require('passport');
 const {isAuthenticated, requireRole} = require("../middleware/authMiddleware")
 
 router.get("/", memberController.getMemberAuth)
-router.get("/dashboard",isAuthenticated ,memberController.loginSuccess)
+router.get("/dashboard",isAuthenticated ,memberController.getDashboard)
 
 router.post("/signup", memberController.register)
 
