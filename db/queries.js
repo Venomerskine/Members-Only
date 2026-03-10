@@ -19,4 +19,6 @@ async function getAllMessages() {
         join messages m 
         on m.user_id = u.id 
     `
+
+    return await pool.query(query)
 }
