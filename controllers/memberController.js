@@ -1,12 +1,14 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
 const db = require("../db/index")
+const dataB = require("../db/queries")
 
 
 // get the home auth page
 async function getMemberAuth(req, res) {
     res.render("auth.ejs")
 }
+
 
 // register new user
 const register = async (req, res) => {
@@ -47,6 +49,16 @@ loginSuccess = (req, res) => {
 logout = async (req, res) => {
     req.logout(() => {
         res.json({message: "Logged Out!"})
+    })
+}
+
+// get the dashboard 
+async function getDashboard(req, res) {
+    const messages = await dataB.getAllMessages();
+
+    res.render("dashboard", {
+        user: req.user,
+        messages: messages
     })
 }
 
@@ -97,5 +109,6 @@ module.exports = {
     loginSuccess,
     joinClub,
     createMessage,
-    deleteMessage
+    deleteMessage,
+    getDashboard
 }
