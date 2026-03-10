@@ -10,13 +10,26 @@ async function getMemberAuth(req, res) {
 
 // register new user
 const register = async (req, res) => {
-    console.log("body: ", req.body)
     const {first_name, last_name, username, email, password} = req.body;
     try {
         const hash = await bcrypt.hash(password, 10);
         const user = await User.createUser(first_name, last_name, username, email, hash);
 
-        return res.json({status: "success", redirect: "/dashboard"})
+         req.login(user, (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({
+                    status: "error",
+                    message: "Login after registration failed"
+                });
+            }
+
+            return res.json({
+                status: "success",
+                redirect: "/dashboard"
+            });
+        });
+
     } catch (err) {
         console.error(err);
         return res.status(500).json({status: "error", message: "Registration Failed"})
@@ -43,8 +56,7 @@ async function logout(req, res) {
 
 async function joinClub (req, res){
     const code = req.body.join;
-    console.log("Body: ", req.body)
-    console.log("Code: ", code)
+
 
     const userId = req.user.id
 
