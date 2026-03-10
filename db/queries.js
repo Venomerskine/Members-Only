@@ -22,3 +22,7 @@ async function getAllMessages() {
 
     return await pool.query(query)
 }
+
+module.exports = {
+    getAllMessages
+}
