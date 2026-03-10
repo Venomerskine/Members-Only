@@ -13,7 +13,7 @@
     </header>
     <main>
         <section class="messages">
-            <%- include("partials/messageList") %>
+            <%- include("partials/messageList", {messages: messages}) %>
         </section>
 
         <% if(user.role === "user"){ %>

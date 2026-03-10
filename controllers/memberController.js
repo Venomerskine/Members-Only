@@ -58,7 +58,7 @@ async function getDashboard(req, res) {
 
     res.render("dashboard", {
         user: req.user,
-        messages: messages
+        messages: messages.rows
     })
 }
 
@@ -95,11 +95,42 @@ async function joinClub (req, res){
 }
 
 async function createMessage(req, res) {
+    try{
+        if(!req.user || (req.user.role !== "member" && req.user !== "admin")) {
+            return res.status(403).send("Not allowed")
+        }
 
+        const text = req.body.message?.trim();
+        const title = req.bodytitle?.trim()
+
+        if (!text) {
+            return res.redirect("/dasboard")
+        }
+
+        await db.query(
+            `
+                insert into messages (title, body_text, user_id)
+                values ($1, $2, $3)
+            `,
+            [title, text, req.user.id]
+        )
+        
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to create message")
+    }
 }
 
 async function deleteMessage(req, res) {
-    
+    if (req.user.role !== "admin") {
+        return res.status(403).send("Forbidden")
+    }
+
+    await db.query(
+        "delete from messages where id = $1", [req.params.id]
+    )
+
+    res.redirect("/dasboard")
 }
 
 module.exports = {
