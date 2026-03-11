@@ -12,18 +12,18 @@
         <h1><%=user.role%></h1>
     </header>
     <main>
-        <section class="messages">
-            <%- include("partials/messageList", {messages: messages}) %>
-        </section>
-
+        
         <% if(user.role === "user"){ %>
             <button onclick="popup.showModal()">Join The Club</button>
             <%- include("partials/joinForm") %>
-        <% } %>
-
-        <% if(user.role === "member" || user.role === "admin"){ %>
-        <%- include("partials/messageForm") %>
-        <% } %>
+            <% } %>
+            
+            <% if(user.role === "member" || user.role === "admin"){ %>
+                <%- include("partials/messageForm") %>
+                <% } %>
+                <section class="messages">
+                    <%- include("partials/messageList", {messages: messages}) %>
+                </section>
     </main>
 </body>
 </html>

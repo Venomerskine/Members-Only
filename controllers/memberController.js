@@ -99,7 +99,7 @@ async function createMessage(req, res) {
 
         console.log("User Role: ",  req.user.role)
         console.log("user?", req.user)
-        if(!req.user || (req.user.role !== 'member' && req.user !== 'admin')) {
+        if(!req.user || (req.user.role !== 'member' && req.user.role !== 'admin')) {
             return res.status(403).send("Not allowed to create")
         }
 
