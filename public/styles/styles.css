@@ -1,3 +1,18 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    height: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+
 :root{
     /* Action */
   --primary: hsl(115, 76%, 36%);
@@ -95,5 +110,147 @@ body.light{
 }
 
 
+body{
+    background-color: var(--bg-dark);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
 
+.body, .section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--space-2);
+}
 
+.auth-wrapper, .message-form {
+    background-color: var(--bg);
+    padding: var(--space-2);
+    border-radius: var(--radius-small);
+    min-height: 500px;
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+label, input, textarea{
+    color: var(--text-muted);
+    line-height: var(--space-3);
+    font-size: var(--font-size2);
+}
+
+label {
+    text-align: right;
+}
+
+input, textarea {
+    padding: var(--space-1);
+    border-radius: var(--radius-small);
+    background-color: var(--bg-light);
+    border: 1px solid var(--border);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: var(--space-2);
+}
+
+.input{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: var(--space-1);
+}
+
+.btn{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+
+.btn button{
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-small);
+    font-size: var(--font-size-regular);
+    background-color: var(--alert-success);
+}
+
+.auth-btn{
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-small);
+    font-size: var(--font-size-regular);
+    background-color: var(--alert-info);
+}
+
+h1{
+    color: var(--text);
+    font-size: var(--h1);
+}
+
+p{
+    color: var(--text-muted);
+}
+
+header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    top: 5px;
+    background-color: var(--bg);
+    padding: var(--space-1);
+}
+
+.messages{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: var(--bg);
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-2);
+}
+
+.message-card{
+    background-color: var(--bg-light);
+    width: 40%;
+    border-radius: var(--radius-small);
+    border: 1px solid var(--border);
+    padding: var(--space-1);
+}
+
+.message-card h2{
+    color: var(--text-muted);
+    font-size: var(--font-size2);
+}
+
+.message-card p{
+    color: var(--text);
+    font-size: var(--font-size2);
+}
+
+small{
+    color: var(--text-muted);
+}
+
+.del-btn{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+
+.del-btn button{
+    border: 1 px solid var(--border);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-small);
+    font-size: var(--font-size-regular);
+    background-color: var(--alert-danger);
+    color: var(--text);
+}

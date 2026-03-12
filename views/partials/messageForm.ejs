@@ -2,11 +2,18 @@
 
 <form action="/messages" method="POST">
 
-    <label for="title">Title</label>
-    <input type="text" name="title" id="title">
-<textarea name="message" required></textarea>
+    <div class="input">
+        <label for="title">Title: </label>
+        <input type="text" name="title" id="title">
+    </div>
+    <div class="input">
+        <label for="message">Body: </label>
+        <textarea name="message" required></textarea>
+    </div>
 
-<button type="submit">Post Message</button>
+<div class="btn">
+    <button type="submit">Post Message</button>
+</div>
 
 </form>
 

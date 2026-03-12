@@ -20,7 +20,9 @@
             <% } %>
             
             <% if(user.role === "member" || user.role === "admin"){ %>
-                <%- include("partials/messageForm") %>
+                <div class="section">
+                    <%- include("partials/messageForm") %>
+                </div>
                 <% } %>
                 <section class="messages">
                     <%- include("partials/messageList", {messages: messages}) %>
